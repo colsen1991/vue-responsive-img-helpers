@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   install (Vue) {
     Vue.prototype.$createSrc = function (baseSrc, w = null, auto = 'format', fm = 'jpg', fit = 'max', q = 45) {
       return `${baseSrc}?auto=${auto}&fm=${fm}&q=${q}&fit=${fit}${w ? `&w=${w}` : ''}`
