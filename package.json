@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/colsen1991/vue-responsive-img-helpers.git"
   },
+  "scripts": {
+    "precommit": "babel src/index.js --out-file index.js --presets=env"
+  },
   "keywords": [
     "vue",
     "responsive",
@@ -21,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/colsen1991/vue-responsive-img-helpers/issues"
   },
-  "homepage": "https://github.com/colsen1991/vue-responsive-img-helpers#readme"
+  "homepage": "https://github.com/colsen1991/vue-responsive-img-helpers#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "precommit": "^1.2.2"
+  }
 }
