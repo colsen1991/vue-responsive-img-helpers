@@ -1,7 +1,7 @@
 module.exports = {
   install (Vue) {
     Vue.prototype.$createSrc = function (baseSrc, w = null, q = null, auto = 'compress', fit = 'max') {
-      return `${baseSrc}?auto=${auto}&q=${q}&fit=${fit}${w ? `&w=${w}` : ''}${q ? `&q=${q}` : ''}`
+      return `${baseSrc}?auto=${auto}&fit=${fit}${w ? `&w=${w}` : ''}${q ? `&q=${q}` : ''}`
     }
 
     Vue.prototype.$createSizes = function (standard = '50vw', isMobile = false) {

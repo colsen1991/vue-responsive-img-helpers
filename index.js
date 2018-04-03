@@ -8,7 +8,7 @@ module.exports = {
       var auto = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'compress';
       var fit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'max';
 
-      return baseSrc + '?auto=' + auto + '&q=' + q + '&fit=' + fit + (w ? '&w=' + w : '') + (q ? '&q=' + q : '');
+      return baseSrc + '?auto=' + auto + '&fit=' + fit + (w ? '&w=' + w : '') + (q ? '&q=' + q : '');
     };
 
     Vue.prototype.$createSizes = function () {
