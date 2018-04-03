@@ -7,7 +7,7 @@ module.exports = {
       var fm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'jpg';
       var auto = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'format';
       var fit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'max';
-      var q = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 45;
+      var q = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 35;
 
       return baseSrc + '?auto=' + auto + '&fm=' + fm + '&q=' + q + '&fit=' + fit + (w ? '&w=' + w : '');
     };
