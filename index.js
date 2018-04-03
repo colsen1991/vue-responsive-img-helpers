@@ -5,11 +5,10 @@ module.exports = {
     Vue.prototype.$createSrc = function (baseSrc) {
       var w = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var auto = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'format';
-      var fm = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'jpg';
-      var fit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'max';
-      var q = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 45;
+      var fit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'max';
+      var q = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 45;
 
-      return baseSrc + '?auto=' + auto + '&fm=' + fm + '&q=' + q + '&fit=' + fit + (w ? '&w=' + w : '');
+      return baseSrc + '?auto=' + auto + '&q=' + q + '&fit=' + fit + (w ? '&w=' + w : '');
     };
 
     Vue.prototype.$createSizes = function () {
