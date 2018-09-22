@@ -1,14 +1,44 @@
 'use strict';
 
+function createSrc(baseSrc) {
+  var w = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var q = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var auto = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'compress';
+  var fit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'max';
+  var hr = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.56;
+
+  return baseSrc + '?auto=' + auto + '&fit=' + fit + (w ? '&w=' + w : '') + (q ? '&q=' + q : '') + (hr && w ? '&h=' + w * hr : '');
+}
+
+function createSrcSet(src) {
+  var hr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.56;
+  var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
+  var to = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1400;
+  var step = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 100;
+
+  var srcSet = '';
+  var firstSrcDone = false;
+
+  for (var i = from; i <= to; i += step) {
+    srcSet += '' + (firstSrcDone ? ', ' : '') + src + '&w=' + i + (hr ? '&h=' + i * hr : '') + ' ' + i + 'w';
+
+    if (!firstSrcDone) firstSrcDone = true;
+  }
+
+  return srcSet;
+}
+
 module.exports = {
   install: function install(Vue) {
-    Vue.prototype.$createSrc = function (baseSrc) {
+    Vue.prototype.$createSrc = createSrc;
+
+    Vue.prototype.$createSrcLegacy = function (baseSrc) {
       var w = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var q = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var auto = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'compress';
       var fit = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'max';
 
-      return baseSrc + '?auto=' + auto + '&fit=' + fit + (w ? '&w=' + w : '') + (q ? '&q=' + q : '');
+      return createSrc(baseSrc, w, q, auto, fit, null);
     };
 
     Vue.prototype.$createSizes = function () {
@@ -18,21 +48,14 @@ module.exports = {
       return '(max-width: 768px) ' + (isMobile ? '100vw' : standard) + ', ' + standard;
     };
 
-    Vue.prototype.$createSrcSet = function (src) {
+    Vue.prototype.$createSrcSet = createSrcSet;
+
+    Vue.prototype.$createSrcSetLegacy = function (src) {
       var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 400;
       var to = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1400;
       var step = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 100;
 
-      var srcSet = '';
-      var firstSrcDone = false;
-
-      for (var i = from; i <= to; i += step) {
-        srcSet += '' + (firstSrcDone ? ', ' : '') + src + '&w=' + i + ' ' + i + 'w';
-
-        if (!firstSrcDone) firstSrcDone = true;
-      }
-
-      return srcSet;
+      return createSrcSet(src, null, from, to, step);
     };
   }
 };
