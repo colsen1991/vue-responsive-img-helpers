@@ -1,23 +1,25 @@
-function createSrc (src, w, fit, hr) {
-  return `${src}?auto=compress&fit=${fit}${w ? `&w=${w}` : ''}${hr && w ? `&h=${w*hr}` : ''}`
+function createSrc (src, {width = 1600, fit = 'crop', heightRatio = .5625, suffix = ''}) {
+  return `${src}?auto=compress&fit=${fit}${width ? `&w=${width}` : ''}${heightRatio && width ? `&h=${width*heightRatio}` : ''}${suffix}`
 }
 
 module.exports = {
   install (Vue) {
     Vue.prototype.$createSrc = createSrc
 
-    Vue.prototype.$createSizes = function (standard = '50vw', isMobile = false) {
-      return `(max-width: 768px) ${isMobile ? '100vw' : standard}, ${standard}`
+    Vue.prototype.$createSizes = function ({desktop = '50vw', tablet = '75vw', mobile = '100vw'}) {
+      return `(max-width: 768px) ${mobile}, (min-width: 769px) and (max-width: 1023px) ${tablet}, ${desktop}`
     }
 
-    Vue.prototype.$createSrcSet = function (src, fit, hr) {
+    Vue.prototype.$createSrcSet = function (src, {fit = 'crop', heightRatio = .5625, max = 1600, min = 100, increment = 100, suffix = ''}) {
       let srcSet = ''
       let firstSrcDone = false
 
-      for (let w = 100; w <= 1600; w += 100) {
-        srcSet += `${firstSrcDone ? ', ' : ''}${createSrc(src, w, fit, hr)} ${w}w`
+      for (let width = min; width <= max; width += increment) {
+        srcSet += `${firstSrcDone ? ', ' : ''}${createSrc(src, {width, fit, heightRatio, suffix})} ${width}w`
 
-        if (!firstSrcDone) firstSrcDone = true
+        if (!firstSrcDone) {
+          firstSrcDone = true
+        }
       }
 
       return srcSet

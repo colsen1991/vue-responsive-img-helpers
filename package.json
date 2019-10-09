@@ -1,7 +1,7 @@
 {
   "name": "vue-responsive-img-helpers",
-  "version": "1.2.0",
-  "description": "A small Vue.js plugin which adds 3 methods to the global scope used in creating img src, srcset and sizes attributes.",
+  "version": "2.0.0",
+  "description": "A small Vue.js plugin which adds 3 methods to the Vue global scope used in creating img src, srcset and sizes attributes.",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -27,7 +27,6 @@
   "homepage": "https://github.com/colsen1991/vue-responsive-img-helpers#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "precommit": "^1.2.2"
+    "babel-preset-env": "^1.6.1"
   }
 }
