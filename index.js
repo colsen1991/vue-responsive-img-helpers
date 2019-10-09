@@ -1,7 +1,8 @@
 'use strict';
 
-function createSrc(src, _ref) {
-  var _ref$width = _ref.width,
+function createSrc(src) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$width = _ref.width,
       width = _ref$width === undefined ? 1600 : _ref$width,
       _ref$fit = _ref.fit,
       fit = _ref$fit === undefined ? 'crop' : _ref$fit,
@@ -17,8 +18,9 @@ module.exports = {
   install: function install(Vue) {
     Vue.prototype.$createSrc = createSrc;
 
-    Vue.prototype.$createSizes = function (_ref2) {
-      var _ref2$desktop = _ref2.desktop,
+    Vue.prototype.$createSizes = function () {
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          _ref2$desktop = _ref2.desktop,
           desktop = _ref2$desktop === undefined ? '50vw' : _ref2$desktop,
           _ref2$tablet = _ref2.tablet,
           tablet = _ref2$tablet === undefined ? '75vw' : _ref2$tablet,
@@ -28,8 +30,9 @@ module.exports = {
       return '(max-width: 768px) ' + mobile + ', (min-width: 769px) and (max-width: 1023px) ' + tablet + ', ' + desktop;
     };
 
-    Vue.prototype.$createSrcSet = function (src, _ref3) {
-      var _ref3$fit = _ref3.fit,
+    Vue.prototype.$createSrcSet = function (src) {
+      var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+          _ref3$fit = _ref3.fit,
           fit = _ref3$fit === undefined ? 'crop' : _ref3$fit,
           _ref3$heightRatio = _ref3.heightRatio,
           heightRatio = _ref3$heightRatio === undefined ? .5625 : _ref3$heightRatio,
